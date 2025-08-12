@@ -43,7 +43,7 @@ async def prompt_command(ctx: arc.Context, mono: arc.Option[bool, arc.BoolParams
     await ctx.respond(f"Prompt:\n  {prompt}")
     
 @client.include
-@arc.slash_command("kill ham", "kills that bitch ass owl")
+@arc.slash_command("kill-ham", "kills that bitch ass owl")
 async def kill_ham_command(ctx: arc.Context):
     await ctx.respond("<@674801593501089802> you're dead now")
 
