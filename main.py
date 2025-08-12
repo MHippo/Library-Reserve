@@ -18,8 +18,8 @@ async def ping_command(ctx: arc.Context):
     await ctx.respond(f"Pong! Latency: {math.floor(latency)} ms")
 
 @client.include
-@arc.slash_command("rankprompt", "Generates a prompt based on the specified level")
-async def prompt_command(ctx: arc.Context, rank: arc.Option[str, arc.StrParams("Rank", choices=["Library Liability", "scribe", "scholar", "Librarian", "Book Keeper", "Lorekeeper"])]):
+@arc.slash_command("rprompt", "Generates a prompt based on the specified rank")
+async def prompt_command(ctx: arc.Context, rank: arc.Option[str, arc.StrParams("Rank", choices=["Library Liability", "scribe", "scholar", "Book Keeper", "Librarian", "Lorekeeper"])]):
     prompt = promptgen.generate_ham_prompt(rank)
     print(prompt)
     text = "\n  ".join(prompt)

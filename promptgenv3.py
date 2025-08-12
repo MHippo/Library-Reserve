@@ -16,7 +16,7 @@ class Promptgen:
         return att
 
     def pick_oath(self, bharper):
-        oaths = ["Oathless", "Arcwarder",
+        oaths = ["Oathless",
                  "Blindseer", "Chainwarden",
                  "Contractor", "Dawnwalker", "Fadetrimmer",
                  "Jetstriker", "Soulbreaker",
@@ -39,9 +39,9 @@ class Promptgen:
             case "Heavy":
                 return random.choice(["Greataxe", "Greathammer", "Greatsword", "Any"])
             case "Medium":
-                return random.choice(["Sword", "Spear", "Club", "Rifle", "Twinblade", "Any"])
+                return random.choice(["Sword", "Spear", "Club", "Twinblade", "Any"])
             case "Light":
-                return random.choice(["Dagger", "Fist", "Rapier", "Pistol", "Any"])
+                return random.choice(["Dagger", "Fist", "Rapier", "Any"])
             case "any":
                 return "any"
 
