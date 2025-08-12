@@ -19,7 +19,7 @@ async def ping_command(ctx: arc.Context):
 
 @client.include
 @arc.slash_command("rprompt", "Generates a prompt based on the specified rank")
-async def prompt_command(ctx: arc.Context, rank: arc.Option[str, arc.StrParams("Rank", choices=["Library Liability", "scribe", "scholar", "Library", "Lorekeeper", "Knowledge Seeker"])]):
+async def prompt_command(ctx: arc.Context, rank: arc.Option[str, arc.StrParams("Rank", choices=["Library Liability", "Scribe", "Scholar", "Librarian", "Lorekeeper", "Knowledge Seeker"])]):
     prompt = promptgen.generate_ham_prompt(rank)
     print(prompt)
     text = "\n  ".join(prompt)
@@ -41,7 +41,10 @@ async def prompt_command(ctx: arc.Context, mono: arc.Option[bool, arc.BoolParams
     prompt = promptgen.generate_prompt(mono=mono)
     print(prompt)
     await ctx.respond(f"Prompt:\n  {prompt}")
-
-
+    
+@client.include
+@arc.slash_command("Kill Ham", "Kills that bitch ass owl")
+async def kill_ham_command(ctx: arc.Context):
+    await ctx.respond("<@674801593501089802> you're dead now")
 
 bot.run()

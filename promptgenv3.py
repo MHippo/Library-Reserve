@@ -97,7 +97,7 @@ class Promptgen:
                         f"Mono {self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(True)} {self.pick_use()}",
                     ]
                 ))
-            case "Library":
+            case "Librarian":
                 prompt.append(random.choice(
                     [
                         f"Dual {self.pick_attunement()}/{self.pick_attunement()} {self.pick_oath(False)} {self.pick_weapon_type()} {self.pick_use()}",
