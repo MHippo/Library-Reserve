@@ -97,14 +97,14 @@ class Promptgen:
                         f"Mono {self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(True)} {self.pick_use()}",
                     ]
                 ))
-            case "Book Keeper":
+            case "Library":
                 prompt.append(random.choice(
                     [
                         f"Dual {self.pick_attunement()}/{self.pick_attunement()} {self.pick_oath(False)} {self.pick_weapon_type()} {self.pick_use()}",
                         f"Dual {self.pick_attunement()}/{self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(False)} {self.pick_use()}"
                     ]
                 ))
-            case "Librarian":
+            case "Lorekeeper":
                 for i in range(2):
                     prompt.append(random.choice(
                         [
@@ -112,7 +112,7 @@ class Promptgen:
                             f"Dual {self.pick_attunement()}/{self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(False)} {self.pick_use(True)}",
                         ]
                     ))
-            case "Lorekeeper":
+            case "Knowledge Seeker":
                 for i in range(3):
                     prompt.append(random.choice(
                         [
