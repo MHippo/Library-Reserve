@@ -83,14 +83,20 @@ class Promptgen:
     def generate_ham_prompt(self, olevel) -> list[str]: # only for ham's server
         prompt = []
         match olevel:
-            case "Library Liability" | "scribe":
+            case "Library Liability":
                 prompt.append(random.choice(
                     [
                         f"Mono {self.pick_attunement()} {self.pick_oath(True)} {self.pick_weapon_type()} chime",
-                        f"Mono {self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(True)} chime",
                     ]
                 ))
-            case "scholar":
+            case "Scribe":
+                prompt.append(random.choice(
+                    [
+                        f"Mono {self.pick_attunement()} {self.pick_oath(True)} {self.pick_weapon_type()} {self.pick_use()}",
+                        f"Mono {self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(True)} {self.pick_use()}"
+                    ]
+                ))
+            case "Sholar":
                 prompt.append(random.choice(
                     [
                         f"Mono {self.pick_attunement()} {self.pick_oath(True)} {self.pick_weapon_type()} {self.pick_use()}",
