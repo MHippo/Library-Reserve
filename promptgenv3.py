@@ -7,7 +7,7 @@ class Promptgen:
     def pick_attunement(self):
         attunements = ["Flame", "Frost", "Thunder", "Gale", "Shadow", "Ironsing", "Blood"]
         if random.randint(1, 15) == 6:
-            return "any"
+            return "any attunement"
         att = random.choice(attunements)
         if att == self.last_attunement[-1]:
             attunements.pop(attunements.index(att))
@@ -22,7 +22,7 @@ class Promptgen:
                  "Jetstriker", "Soulbreaker",
                  "Starkindred", "Visionshaper"]
         if random.randint(1, 24) == 6:
-            return "any"
+            return "any oath"
         if bharper:
             oaths.append("Blade Harper")
         return random.choice(oaths)
@@ -43,7 +43,7 @@ class Promptgen:
             case "Light":
                 return random.choice(["Dagger", "Fist", "Rapier", "Any"])
             case "any":
-                return "any"
+                return "any weapon"
 
     def pick_legendary_wep(self, attunement):
         match attunement:
@@ -61,7 +61,7 @@ class Promptgen:
                 return random.choice(["Deepcrusher", "Requiem"])
             case "Blood":
                 return random.choice(["BloodFouler"])
-            case "any":
+            case "any attunement":
                 attunements = ["Flame", "Frost", "Thunder", "Gale", "Shadow", "Ironsing", "Blood"]
                 attunements.pop(attunements.index(self.last_attunement[-1]))
                 return self.pick_legendary_wep(random.choice(attunements))
@@ -75,9 +75,7 @@ class Promptgen:
             ])
         return random.choice([
             f"Dual {self.pick_attunement()}/{self.pick_attunement()} {self.pick_oath(False)} {self.pick_weapon_type()} {self.pick_use()}",
-            f"Dual {self.pick_attunement()}/any {self.pick_oath(False)} {self.pick_weapon_type()} {self.pick_use()}",
-            f"Dual {self.pick_attunement()}/{self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(False)} {self.pick_use()}",
-            f"Dual {self.pick_legendary_wep(self.pick_attunement())}/any {self.pick_oath(False)} {self.pick_use()}",
+            f"Dual {self.pick_attunement()}/{self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(False)} {self.pick_use()}"
         ])
     
     def generate_ham_prompt(self, olevel) -> list[str]: # only for ham's server
@@ -86,7 +84,7 @@ class Promptgen:
             case "Library Liability":
                 prompt.append(random.choice(
                     [
-                        f"Mono {self.pick_attunement()} {self.pick_oath(True)} {self.pick_weapon_type()} chime",
+                        f"Mono {self.pick_attunement()} chime no heroblade",
                     ]
                 ))
             case "Scribe":
