@@ -8,9 +8,8 @@ class Promptgen:
         attunements = ["Flame", "Frost", "Thunder", "Gale", "Shadow", "Ironsing", "Blood"]
         if random.randint(1, 15) == 6:
             return "any attunement"
-        att = random.choice(attunements)
-        if att == self.last_attunement[-1]:
-            attunements.pop(attunements.index(att))
+        if self.last_attunement[-1]:
+            attunements.pop(attunements.index(self.last_attunement[-1]))
         att = random.choice(attunements)
         self.last_attunement.append(att)
         return att
