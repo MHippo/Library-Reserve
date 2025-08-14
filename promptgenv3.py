@@ -2,8 +2,7 @@ import random
 
 class Promptgen:
     def __init__(self):
-        self.last_attunement = ["poop"] #needs to be added or else index error
-    
+        self.last_attunement = []
     def pick_attunement(self):
         attunements = ["Flame", "Frost", "Thunder", "Gale", "Shadow", "Ironsing", "Blood"]
         if random.randint(1, 15) == 6:
