@@ -48,13 +48,13 @@ async def kill_ham_command(ctx: arc.Context):
     await ctx.respond("<@674801593501089802> you're dead now")
 
 @client.include
-@arc.slash_command("Tri")
+@arc.slash_command("tri")
 async def tri_command(ctx: arc.Context):
     await ctx.respond("TriTheGuy")
     
 @client.include
-@arc.slash_command("FixTheBot")
+@arc.slash_command("fixthebot")
 async def fix_the_bot_command(ctx: arc.Context):
-    await ctx.respond("FixTheBot <@457197127723122688>")
+    await ctx.respond("Fix The Bot <@457197127723122688>")
 
 bot.run()
