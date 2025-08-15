@@ -35,15 +35,15 @@ class Promptgen:
         weapon_class = ["Heavy", "Medium", "Light", "any"]
         match random.choice(weapon_class):
             case "Heavy":
-                return random.choice(["Greataxe", "Greathammer", "Greatsword", "Any"])
+                return random.choice(["Greataxe", "Greathammer", "Greatsword", "Any Heavy"])
             case "Medium":
-                return random.choice(["Sword", "Spear", "Club", "Twinblade", "Any"])
+                return random.choice(["Sword", "Spear", "Club", "Twinblade", "Any Medium"])
             case "Light":
-                return random.choice(["Dagger", "Fist", "Rapier", "Any"])
+                return random.choice(["Dagger", "Fist", "Rapier", "Any Light"])
             case "any":
                 return "any weapon"
 
-    def pick_legendary_wep(self, attunement):
+    def pick_legendary_wep(self, attunement, high_req):
         match attunement:
             case "Flame":
                 return random.choice(["Pyre", "Pleeksty's", "Hellflame"])
@@ -54,7 +54,9 @@ class Promptgen:
             case "Gale":
                 return random.choice(["Curved", "Wraithclaw"])
             case "Shadow":
-                return random.choice(["Crypt", "Spindle", "Weal and Woe"])
+                if high_req:
+                    return random.choice(["Crypt", "Spindle", "Weal and Woe"])
+                return random.choice(["Crypt", "Spindle"])
             case "Ironsing":
                 return random.choice(["Deepcrusher", "Requiem"])
             case "Blood":
@@ -62,7 +64,7 @@ class Promptgen:
             case "any attunement":
                 attunements = ["Flame", "Frost", "Thunder", "Gale", "Shadow", "Ironsing", "Blood"]
                 attunements.pop(attunements.index(self.last_attunement[-1]))
-                return self.pick_legendary_wep(random.choice(attunements))
+                return self.pick_legendary_wep(random.choice(attunements), high_req)
 
     def generate_prompt(self, mono=True) -> str:
         if mono:
@@ -89,21 +91,21 @@ class Promptgen:
                 prompt.append(random.choice(
                     [
                         f"Mono {self.pick_attunement()} {self.pick_oath(True)} {self.pick_weapon_type()} {self.pick_use()}",
-                        f"Mono {self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(True)} {self.pick_use()}"
+                        f"Mono {self.pick_legendary_wep(self.pick_attunement(), True)} {self.pick_oath(True)} {self.pick_use()}"
                     ]
                 ))
             case "Scholar":
                 prompt.append(random.choice(
                     [
                         f"Mono {self.pick_attunement()} {self.pick_oath(True)} {self.pick_weapon_type()} {self.pick_use()}",
-                        f"Mono {self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(True)} {self.pick_use()}",
+                        f"Mono {self.pick_legendary_wep(self.pick_attunement(), True)} {self.pick_oath(True)} {self.pick_use()}",
                     ]
                 ))
             case "Librarian":
                 prompt.append(random.choice(
                     [
                         f"Dual {self.pick_attunement()}/{self.pick_attunement()} {self.pick_oath(False)} {self.pick_weapon_type()} {self.pick_use()}",
-                        f"Dual {self.pick_attunement()}/{self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(False)} {self.pick_use()}"
+                        f"Dual {self.pick_attunement()}/{self.pick_legendary_wep(self.pick_attunement(), False)} {self.pick_oath(False)} {self.pick_use()}"
                     ]
                 ))
             case "Lorekeeper":
@@ -111,7 +113,7 @@ class Promptgen:
                     prompt.append(random.choice(
                         [
                             f"Dual {self.pick_attunement()}/{self.pick_attunement()} {self.pick_oath(False)} {self.pick_weapon_type()} {self.pick_use(True)}",
-                            f"Dual {self.pick_attunement()}/{self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(False)} {self.pick_use(True)}",
+                            f"Dual {self.pick_attunement()}/{self.pick_legendary_wep(self.pick_attunement(), False)} {self.pick_oath(False)} {self.pick_use(True)}",
                         ]
                     ))
             case "Knowledge Seeker":
@@ -119,8 +121,8 @@ class Promptgen:
                     prompt.append(random.choice(
                         [
                             f"Dual {self.pick_attunement()}/{self.pick_attunement()} {self.pick_oath(False)} {self.pick_weapon_type()} {self.pick_use(True)}",
-                            f"Dual {self.pick_attunement()}/{self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(False)} {self.pick_use(True)}",
-                            f"{self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(True)} {self.pick_use(True)}"
+                            f"Dual {self.pick_attunement()}/{self.pick_legendary_wep(self.pick_attunement(), False)} {self.pick_oath(False)} {self.pick_use(True)}",
+                            f"{self.pick_legendary_wep(self.pick_attunement(), True)} {self.pick_oath(True)} {self.pick_use(True)}"
                         ]
                     ))
         return prompt

@@ -47,4 +47,14 @@ async def prompt_command(ctx: arc.Context, mono: arc.Option[bool, arc.BoolParams
 async def kill_ham_command(ctx: arc.Context):
     await ctx.respond("<@674801593501089802> you're dead now")
 
+@client.include
+@arc.slash_command("Tri")
+async def tri_command(ctx: arc.Context):
+    await ctx.respond("TriTheGuy")
+    
+@client.include
+@arc.slash_command("FixTheBot")
+async def fix_the_bot_command(ctx: arc.Context):
+    await ctx.respond("FixTheBot <@457197127723122688>")
+
 bot.run()
