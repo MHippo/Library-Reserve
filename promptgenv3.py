@@ -70,12 +70,12 @@ class Promptgen:
         if mono:
             return random.choice([
                 f"Mono {self.pick_attunement()} {self.pick_oath(True)} {self.pick_weapon_type()} {self.pick_use()}",
-                f"Mono {self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(True)} {self.pick_use()}",
+                f"Mono {self.pick_legendary_wep(self.pick_attunement(), True)} {self.pick_oath(True)} {self.pick_use()}",
                 f"{self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(True)} {self.pick_use()}"
             ])
         return random.choice([
             f"Dual {self.pick_attunement()}/{self.pick_attunement()} {self.pick_oath(False)} {self.pick_weapon_type()} {self.pick_use()}",
-            f"Dual {self.pick_attunement()}/{self.pick_legendary_wep(self.pick_attunement())} {self.pick_oath(False)} {self.pick_use()}"
+            f"Dual {self.pick_attunement()}/{self.pick_legendary_wep(self.pick_attunement(), False)} {self.pick_oath(False)} {self.pick_use()}"
         ])
     
     def generate_ham_prompt(self, olevel) -> list[str]: # only for ham's server
