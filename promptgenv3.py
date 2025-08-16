@@ -14,9 +14,9 @@ class Promptgen:
         return att
 
     def pick_oath(self, bharper):
-        oaths = ["Oathless",
+        oaths = ["Oathless","Fadetrimmer",
                  "Blindseer", "Chainwarden",
-                 "Contractor", "Dawnwalker", "Fadetrimmer",
+                 "Contractor", "Dawnwalker",
                  "Jetstriker", "Soulbreaker",
                  "Starkindred", "Visionshaper"]
         if random.randint(1, 24) == 6:
@@ -127,6 +127,13 @@ class Promptgen:
                     ))
         return prompt
 
+    def TriPrompt(self):
+        if random.randint(1, 100) == 67:
+            return "Tri is a faggot LOL"
+        
+        return random.choice([
+            "Deepspindle Bladeharper"
+        ])
 
     #def pick_concept_prompt():
 
