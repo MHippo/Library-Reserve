@@ -127,14 +127,6 @@ class Promptgen:
                     ))
         return prompt
 
-    def TriPrompt(self):
-        if random.randint(1, 100) == 67:
-            return "Tri is a faggot LOL"
-        
-        return random.choice([
-            "Deepspindle Bladeharper"
-        ])
-
     #def pick_concept_prompt():
 
     #def pick_bans(self):
