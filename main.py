@@ -30,7 +30,7 @@ async def prompt_command(ctx: arc.Context, rank: arc.Option[str, arc.StrParams("
             text = "\n  ".join(prompt)
             await ctx.respond(f"{rank}:\n  {text}")
         else:
-            await ctx.respond("no prompts for you loser")
+            await ctx.respond("nah")
 
 @client.include
 @arc.slash_command("groom", "grooms deeoon")
