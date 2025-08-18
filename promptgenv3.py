@@ -18,7 +18,7 @@ class Promptgen:
                  "Blindseer", "Chainwarden",
                  "Contractor", "Dawnwalker",
                  "Jetstriker", "Soulbreaker",
-                 "Starkindred", "Visionshaper"]
+                 "Starkindred"]
         if random.randint(1, 24) == 6:
             return "any oath"
         if bharper:
