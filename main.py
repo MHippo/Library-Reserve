@@ -5,24 +5,35 @@ import tomllib
 import math
 from promptgenv3 import Promptgen
 
-promptgen = Promptgen()
-print(promptgen.generate_ham_prompt("o5"))
 
-bot = hikari.GatewayBot(token=open("token.txt", "r").read().strip())
+promptgen = Promptgen()
+with open("config.toml", "rb") as f:
+    config = tomllib.load(f)
+    token = config["bot"]["token"]
+
+with open("codes.toml", "rb") as f:
+    used_codes = tomllib.load(f)["used_codes"]
+
+bot = hikari.GatewayBot(token=token)
 client = arc.GatewayClient(bot)
 
 codes = [
     "IDIDNOTTOUCHTHOSEKIDS"
 ]
 
-used_codes = open("used_codes.txt", "a+").read().strip().splitlines()
 
 @client.include
 @arc.slash_command("ping", "Responds with Pong and the current latency")
 async def ping_command(ctx: arc.Context):
     if ctx.author.id != 910236925842042930:
-        latency = ping3.ping("discord.com", unit="ms")
-        await ctx.respond(f"Pong! Latency: {math.floor(latency)} ms")
+        try:
+            latency = ping3.ping("discord.com", unit="ms")
+            if latency is not None:
+                await ctx.respond(f"Pong! Latency: {math.floor(latency)} ms")
+            else:
+                await ctx.respond("Pong! (Network unreachable)")
+        except Exception as e:
+            await ctx.respond("Pong! (Error measuring latency)")
     else:
         await ctx.respond("Ping this dick in your ass tri")
 
@@ -32,7 +43,6 @@ async def ping_command(ctx: arc.Context):
 async def prompt_command(ctx: arc.Context, rank: arc.Option[str, arc.StrParams("Rank", choices=["Library Liability", "Scribe", "Scholar", "Librarian", "Lorekeeper", "Knowledge Seeker"])]):
         if ctx.author.id != 910236925842042930:
             prompt = promptgen.generate_ham_prompt(rank)
-            print(prompt)
             text = "\n  ".join(prompt)
             await ctx.respond(f"{rank}:\n  {text}")
         else:
@@ -77,11 +87,14 @@ async def fix_the_bot_command(ctx: arc.Context):
 @arc.slash_command("code", "put in a secret code for something special")
 async def reset_codes_command(ctx: arc.Context, code: arc.Option[str, arc.StrParams("Code")]):
     if ctx.author.id != 910236925842042930:
-        if ctx.author.id in used_codes:
-            await ctx.respond("You have already used a code.")
+        if code in codes:
+            if code not in used_codes[ctx.author.id.to_string()]:
+                used_codes[ctx.author.id.to_string()] = code
+                await ctx.respond("mwah 😘 <3")
+            else:
+                await ctx.respond("You have already used a code.")
         else:
-            open("used_codes.txt", "a").write(f"{ctx.author.id}\n")
-            await ctx.respond("mwah 😘 <3")
+            await ctx.respond("invalid Code")
     else:
         await ctx.respond("Fuck you no code for you.")
 
