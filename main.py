@@ -88,8 +88,10 @@ async def fix_the_bot_command(ctx: arc.Context):
 async def reset_codes_command(ctx: arc.Context, code: arc.Option[str, arc.StrParams("Code")]):
     if ctx.author.id != 910236925842042930:
         if code in codes:
+            if f"{ctx.author.id}" not in used_codes:
+                used_codes[f"{ctx.author.id}"] = []
             if code not in used_codes[f"{ctx.author.id}"]:
-                used_codes[f"{ctx.author.id}"] = code
+                used_codes[f"{ctx.author.id}"].append(code)
                 await ctx.respond("mwah 😘 <3")
             else:
                 await ctx.respond("You have already used a code.")
