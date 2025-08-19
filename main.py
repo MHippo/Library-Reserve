@@ -11,6 +11,12 @@ print(promptgen.generate_ham_prompt("o5"))
 bot = hikari.GatewayBot(token=open("token.txt", "r").read().strip())
 client = arc.GatewayClient(bot)
 
+codes = [
+    "IDIDNOTTOUCHTHOSEKIDS"
+]
+
+used_codes = open("used_codes.txt", "a+").read().strip().splitlines()
+
 @client.include
 @arc.slash_command("ping", "Responds with Pong and the current latency")
 async def ping_command(ctx: arc.Context):
@@ -66,5 +72,17 @@ async def fix_the_bot_command(ctx: arc.Context):
         await ctx.respond("Fix The Bot <@457197127723122688>")
     else:
         await ctx.respond("dont tell him to do shit nigga")
+
+@client.include
+@arc.slash_command("code", "put in a secret code for something special")
+async def reset_codes_command(ctx: arc.Context, code: arc.Option[str, arc.StrParams("Code")]):
+    if ctx.author.id != 910236925842042930:
+        if ctx.author.id in used_codes:
+            await ctx.respond("You have already used a code.")
+        else:
+            open("used_codes.txt", "a").write(f"{ctx.author.id}\n")
+            await ctx.respond("mwah 😘 <3")
+    else:
+        await ctx.respond("Fuck you no code for you.")
 
 bot.run()
