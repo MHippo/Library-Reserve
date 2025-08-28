@@ -101,3 +101,11 @@ async def reset_codes_command(ctx: arc.Context, code: arc.Option[str, arc.StrPar
         await ctx.respond("Fuck you no code for you.")
 
 bot.run()
+
+@client.include
+@arc.slash_command("answer")
+async def answer_command(ctx: arc.Context):
+    if ctx.author.id != 910236925842042930:
+        await ctx.respond(f"you gotta suck hams little ass dick")
+    else:
+        await ctx.respond("fuck you tri.")
